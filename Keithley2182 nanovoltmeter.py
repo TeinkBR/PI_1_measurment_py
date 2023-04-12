@@ -3,25 +3,7 @@
 
 # This code is used for controlling the KEITHLEY 2182A Nanovoltmeter
 
-# In[1]:
 
-
-get_ipython().system('pip install -U pyvisa')
-
-
-# In[ ]:
-
-
-get_ipython().system('pip uninstall -y pyvisa')
-
-
-# In[ ]:
-
-
-get_ipython().system('pip install pyvisa')
-
-
-# In[2]:
 
 
 import visa
@@ -60,7 +42,6 @@ class KeithleyController:
         self.keithley.wait_for_srq()
 
 
-# In[ ]:
 
 
 keithley = KeithleyController("GPIB::12")

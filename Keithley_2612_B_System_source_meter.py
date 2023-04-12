@@ -1,19 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
-
-get_ipython().system('pip install -U pyvisa')
-
-
-# In[4]:
-
-
-pip install pyvisa
-
-
-# In[6]:
 
 
 import pyvisa as visa
