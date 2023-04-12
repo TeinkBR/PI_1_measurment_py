@@ -6,8 +6,13 @@ This Python GUI is designed to perform DC magnetoresistance and Hall effect meas
 # Prerequisites
 This software requires the following Python packages to be installed:
 
-`PyQt5
-`PyVISA
+'''hs
+PyQt5
+'''
+
+'''hs
+PyVISA
+'''
 # Installation
 Clone this repository to your local machine
 Install the required Python packages using pip:
