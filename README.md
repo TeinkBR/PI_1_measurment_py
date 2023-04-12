@@ -6,43 +6,43 @@ This Python GUI is designed to perform DC magnetoresistance and Hall effect meas
 # Prerequisites
 This software requires the following Python packages to be installed:
 
-'''hs
+```
 PyQt5
-'''
+```
 
-'''hs
+```
 PyVISA
-'''
+```
 # Installation
 Clone this repository to your local machine
 Install the required Python packages using pip:
-'''python
+```
 pip install pyqt5 pyvisa
-'''
+```
 # Running the Program
 To run the program, navigate to the repository directory and execute the following command:
-'''python
+```
 python main.py
-'''
+```
 
 #Installation
 # Clone the repository: 
 
-'''python
+```
 git clone git@github.com:TeinkBR/PI_1_measurment_py.git
-'''
+```
 # Install PyVISA: 
-'''python
+```
 pip install pyvisa
-'''
+```
 # Install PyQt5: 
-'''python
+```python
 pip install pyqt5
-'''
+```
 # Run the main file: 
-'''python
+```python
 python main.py
-'''
+```
 # Usage
 
 Connect the LakeShore 336 temperature controller, Keithley 2400 sourcemeter, and IPS 120-10 power supply to the computer via GPIB.
