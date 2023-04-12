@@ -48,7 +48,7 @@ python main.py
 Connect the LakeShore 336 temperature controller, Keithley 2400 sourcemeter, and IPS 120-10 power supply to the computer via GPIB.
 Run the software by executing the 'main.py file'.
 Set the temperature setpoint, current setpoint, and magnetic field setpoint in the corresponding text boxes.
-Click the "Measure Temperature", "Measure Current", and "Set Magnetic Field" buttons to take measurements and control the magnetic field.
+Click the `"Measure Temperature", `"Measure Current", and `"Set Magnetic Field" buttons to take measurements and control the magnetic field.
 Click the "Curve Fitting" button to fit the data to a curve.
 Click the "Convert Data" button to convert the data to an origin-readable file format.
 
