@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QFileDialog
 from PyQt5.QtCharts import QChart, QChartView, QLineSeries
 from Lakeshore_336_Temperature_controller import LakeShoreController
@@ -6,7 +7,7 @@ from Keithley2182_nanovoltmeter import KeithleyController
 from Keithley_2612_B_System_source_meter import IPS120Controller
 from curve_fitting import fit_curve
 from data_conversion import convert_data
-
+from magnet_controller import MagnetController
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -16,6 +17,7 @@ class MainWindow(QMainWindow):
         self.lakeshore = LakeShoreController("GPIB::1")
         self.keithley = KeithleyController("GPIB::12")
         self.ips = IPS120Controller("GPIB::25")
+        self.magnet_controller = MagnetController()
 
         self.btn_lakeshore.setFixedSize(200, 50)
         self.setFixedSize(800, 600)
@@ -71,10 +73,59 @@ class MainWindow(QMainWindow):
         self.btn_data_conversion.move(50, 400)
         self.btn_data_conversion.clicked.connect(self.convert_data)
 
-        # Create a label for displaying the temperature, current, and magnetic field
-        self.lbl_display = QLabel(self)
-        self.lbl_display.move(400, 50)
-        self.lbl_display.resize(300, 300)
+        self.btn_sweep_field = QPushButton("Sweep Magnetic Field", self)
+        self.btn_sweep_field.move(50, 450)
+        self.btn_sweep_field.clicked.connect(self.sweep_m)
+        self.btn_data_conversion = QPushButton("Convert Data", self)
+        self.btn_data_conversion.move(50, 400)
+        self.btn_data_conversion.clicked.connect(self.convert_data)
+
+        # Create buttons for setting magnetic field
+        self.btn_set_magnetic_field = QPushButton("Set Magnetic Field", self)
+        self.btn_set_magnetic_field.move(50, 450)
+        self.btn_set_magnetic_field.clicked.connect(self.set_magnetic_field)
+
+        self.btn_sweep_magnetic_field = QPushButton("Sweep Magnetic Field", self)
+        self.btn_sweep_magnetic_field.move(50, 500)
+        self.btn_sweep_magnetic_field.clicked.connect(self.sweep_magnetic_field)
+
+        # Create labels and line edits for user input
+        self.lbl_field_setpoint = QLabel("Magnetic Field Setpoint (T):", self)
+        self.lbl_field_setpoint.move(400, 50)
+        self.le_field_setpoint = QLineEdit(self)
+        self.le_field_setpoint.move(550, 50)
+
+        self.lbl_field_range = QLabel("Magnetic Field Range (T):", self)
+        self.lbl_field_range.move(400, 100)
+        self.le_field_range = QLineEdit(self)
+        self.le_field_range.move(550, 100)
+
+        self.lbl_num_points = QLabel("Number of Points:", self)
+        self.lbl_num_points.move(400, 150)
+        self.le_num_points = QLineEdit(self)
+        self.le_num_points.move(550, 150)
+
+        # Create a label for displaying the magnetic field
+        self.lbl_display_magnetic_field = QLabel(self)
+        self.lbl_display_magnetic_field.move(400, 200)
+        self.lbl_display_magnetic_field.resize(300, 50)
+
+
+
+    def sweep_magnetic_field(self):
+        # Get the magnetic field range and number of points from the line edits
+        field_range = tuple(map(float, self.le_field_range.text().split(",")))
+        num_points = int(self.le_num_points.text())
+        # Call the sweep_magnetic_field method of the MagnetController
+        fields = self.magnet_controller.sweep_magnetic_field(field_range, num_points)
+        # Plot the magnetic field vs resistance curve
+        self.series1.clear()
+        for i in range(num_points):
+            self.series1.append(fields[i], 1.0)  # Replace "1.0" with the corresponding resistance value for each point
+        # Display the magnetic field range in the GUI
+        self.lbl_display_magnetic_field.setText(f"Magnetic Field Range: {field_range} T")
+
+
 
     def measure_temperature(self):
         # Get the temperature setpoint from the line edit
