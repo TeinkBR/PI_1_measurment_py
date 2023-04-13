@@ -1,25 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[1]:
-
-
-get_ipython().system('pip install pymeasure')
-
-
-# In[4]:
-
-
-get_ipython().system('pip install --upgrade pymeasure')
-
-
-# In[5]:
 
 
 import pymeasure
 from pymeasure.instruments.lakeshore import LakeShore336
-import pylab
 
+classpymeasure.instruments.lakeshore.lakeshore_base.LakeShoreTemperatureChannel(parent, id)
 class LakeshoreController:
     def __init__(self, gpib_address):
         self.controller = LakeShore336(gpib_address)

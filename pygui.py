@@ -1,8 +1,9 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QFileDialog
-from lakeshore_controller import LakeShoreController
-from keithley_controller import KeithleyController
-from ips120_controller import IPS120Controller
+from PyQt5.QtCharts import QChart, QChartView, QLineSeries
+from Lakeshore_336_Temperature_controller import LakeShoreController
+from Keithley2182_nanovoltmeter import KeithleyController
+from Keithley_2612_B_System_source_meter import IPS120Controller
 from curve_fitting import fit_curve
 from data_conversion import convert_data
 
@@ -15,6 +16,23 @@ class MainWindow(QMainWindow):
         self.lakeshore = LakeShoreController("GPIB::1")
         self.keithley = KeithleyController("GPIB::12")
         self.ips = IPS120Controller("GPIB::25")
+
+        self.btn_lakeshore.setFixedSize(200, 50)
+        self.setFixedSize(800, 600)
+
+        # Create a chart view widget
+        self.chart_view = QChartView(self)
+        self.chart_view.move(400, 400)
+        self.chart_view.resize(300, 200)
+
+        # Create line series for magnetic field vs resistance and current vs voltage
+        self.series1 = QLineSeries()
+        self.series1.setName("Magnetic Field vs Resistance")
+        self.chart_view.chart().addSeries(self.series1)
+
+        self.series2 = QLineSeries()
+        self.series2.setName("Current vs Voltage")
+        self.chart_view.chart().addSeries(self.series2)
 
         # Create labels and line edits for user input
         self.lbl_temp_setpoint = QLabel("Temperature Setpoint (K):", self)
@@ -106,4 +124,12 @@ class MainWindow(QMainWindow):
             # Display a message in the GUI indicating the conversion is complete
             self.lbl_display.setText("Data conversion complete.")
 
-        #
+
+if __name__ == "__main__":
+        app = QApplication(sys.argv)
+        window = MainWindow()
+        window.show()
+        sys.exit(app.exec_())
+    #
+
+
