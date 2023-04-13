@@ -8,10 +8,26 @@ from Keithley_2612_B_System_source_meter import IPS120Controller
 from curve_fit import fit_curve
 from data_conversion import convert_data
 from oxford_instruments_ips_120_10_superconducting_magnet import MagnetController
-
+from mock_measurement import MockMeasurement
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        # mock measurement
+        self.btn_measure = QPushButton("Measure", self)
+        self.btn_measure.move(50, 200)
+        self.btn_measure.clicked.connect(self.measure)
+
+        # Create a chart view widget
+        self.chart_view = QChartView(self)
+        self.chart_view.move(400, 400)
+        self.chart_view.resize(300, 200)
+
+        # Create line series for current vs feedback
+        self.series = QLineSeries()
+        self.series.setName("Current vs Feedback")
+        self.chart_view.chart().addSeries(self.series)
+
+        self.mock_measurement = MockMeasurement()
 
         # Create instances of the subprogram classes
         self.lakeshore = LakeShoreController("GPIB::1")
@@ -174,6 +190,22 @@ class MainWindow(QMainWindow):
             convert_data(data)
             # Display a message in the GUI indicating the conversion is complete
             self.lbl_display.setText("Data conversion complete.")
+
+    def measure(self):
+        # Simulate a current adjustment and receive feedback
+        current = np.linspace(0, 1, 100)
+        feedback = self.mock_measurement.get_feedback(current)
+
+        # Plot the current vs feedback curve
+        self.series.clear()
+        for i in range(100):
+            self.series.append(current[i], feedback[i])
+
+        # Fit the curve using the fit_curve function from curve_fit.py
+        params = fit_curve(np.array([current, feedback]).T)
+
+        # Display the fitted parameters in the GUI
+        self.lbl_display.setText(f"Fitted Parameters: {params}")
 
 
 if __name__ == "__main__":
