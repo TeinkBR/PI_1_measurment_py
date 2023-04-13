@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbef5ad5-93ec-4f5f-8276-4290f77e123a" name="Changes" comment="New update, to do :&#10;check bugs, check the compatibilities.&#10;Next, try it on experimental device">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oxford_instruments_ips_120-10_superconducting_magnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/oxford_instruments_ips_120-10_superconducting_magnet.py" afterDir="false" />
-    </list>
+    <list default="true" id="bbef5ad5-93ec-4f5f-8276-4290f77e123a" name="Changes" comment="added sweeping of magnetic field" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1681322553790</updated>
       <workItem from="1681322566104" duration="9458000" />
-      <workItem from="1681387518251" duration="3535000" />
+      <workItem from="1681387518251" duration="3894000" />
     </task>
     <task id="LOCAL-00001" summary="New update">
       <created>1681324668353</created>
@@ -134,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681388866574</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added sweeping of magnetic field">
+      <created>1681396876600</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681396876600</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,7 +148,8 @@
     <MESSAGE value="New update" />
     <MESSAGE value="New update, to do :&#10;include Lakeshore and Keithley2182_nanovoltmeter.py into the GUI, add chart legend for resistance/magnetic field plot" />
     <MESSAGE value="New update, to do :&#10;check bugs, check the compatibilities.&#10;Next, try it on experimental device" />
-    <option name="LAST_COMMIT_MESSAGE" value="New update, to do :&#10;check bugs, check the compatibilities.&#10;Next, try it on experimental device" />
+    <MESSAGE value="added sweeping of magnetic field" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sweeping of magnetic field" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

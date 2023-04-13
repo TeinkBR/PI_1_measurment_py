@@ -5,9 +5,9 @@ from PyQt5.QtCharts import QChart, QChartView, QLineSeries
 from Lakeshore_336_Temperature_controller import LakeShoreController
 from Keithley2182_nanovoltmeter import KeithleyController
 from Keithley_2612_B_System_source_meter import IPS120Controller
-from curve_fitting import fit_curve
+from curve_fit import fit_curve
 from data_conversion import convert_data
-from magnet_controller import MagnetController
+from oxford_instruments_ips_120_10_superconducting_magnet import MagnetController
 
 class MainWindow(QMainWindow):
     def __init__(self):
