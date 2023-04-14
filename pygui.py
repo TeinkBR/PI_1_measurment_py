@@ -1,10 +1,10 @@
 import sys
 import numpy as np
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QLineEdit, QFileDialog
-from PyQt5.QtCharts import QChart, QChartView, QLineSeries
-from Lakeshore_336_Temperature_controller import LakeShoreController
+from PyQt5.QtChart import QChart, QChartView, QLineSeries
+from Lakeshore_336_Temperature_controller import LakeshoreController
 from Keithley2182_nanovoltmeter import KeithleyController
-from Keithley_2612_B_System_source_meter import IPS120Controller
+from Keithley_2612_B_System_source_meter import Keithley2612BController
 from curve_fit import fit_curve
 from data_conversion import convert_data
 from oxford_instruments_ips_120_10_superconducting_magnet import MagnetController
@@ -30,9 +30,9 @@ class MainWindow(QMainWindow):
         self.mock_measurement = MockMeasurement()
 
         # Create instances of the subprogram classes
-        self.lakeshore = LakeShoreController("GPIB::1")
+        self.lakeshore = LakeshoreController("GPIB::1")
         self.keithley = KeithleyController("GPIB::12")
-        self.ips = IPS120Controller("GPIB::25")
+        self.ips = Keithley2612BController("GPIB::25")
         self.magnet_controller = MagnetController()
 
         self.btn_lakeshore.setFixedSize(200, 50)
