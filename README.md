@@ -3,7 +3,7 @@
 This Python GUI is designed to perform DC magnetoresistance and Hall effect measurements using various instruments including LakeShore temperature controller, Keithley current source, and IPS120 magnet power supply. It also includes features for curve fitting and data conversion.
 
 # Getting Started
-![It looks about like this](PI_1_measurment_py/Screenshot from 2023-04-17 18-30-49.png)
+![It looks about like this](main/PI_1_measurment_py/Screenshot from 2023-04-17 18-30-49.png)
 
 # Prerequisites
 This software requires the following Python packages to be installed:
