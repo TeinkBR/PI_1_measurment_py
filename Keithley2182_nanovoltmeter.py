@@ -1,57 +1,72 @@
-#!/usr/bin/env python
-# coding: utf-8
+import pyvisa
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import datetime
+import time
 
-# This code is used for controlling the KEITHLEY 2182A Nanovoltmeter
+class NanovoltmeterMeasurement:
+    """
+    Class to handle measurements using the Keithley 2182 Nanovoltmeter.
+    """
+    def __init__(self, address='GPIB1::8::INSTR'):
+        """
+        Initialize the nanovoltmeter object and configure its settings.
 
+        :param address: str, GPIB address of the nanovoltmeter
+        """
+        self.rm = pyvisa.ResourceManager()
+        self.nanovoltmeter = self.rm.open_resource(address)
+        self.nanovoltmeter.read_termination = '\n'
+        self.nanovoltmeter.write_termination = '\n'
+        self.nanovoltmeter.write('SENS:VOLT:DC:NPLC 1')
 
+    def single_measurement(self):
+        """
+        Perform a single measurement with the nanovoltmeter.
 
+        :return: float, measured voltage in volts
+        """
+        return float(self.nanovoltmeter.query('READ?'))
 
-import visa
+    def multiple_measurements(self, N):
+        """
+        Perform N measurements with the nanovoltmeter.
 
-class KeithleyController:
-    def __init__(self, gpib_address):
-        rm = visa.ResourceManager()
-        self.keithley = rm.open_resource(gpib_address)
-        
-    def reset(self):
-        self.keithley.write("*rst; status:preset; *cls")
-        
-    def set_measurement_interval(self, interval_in_ms):
-        self.keithley.write(f"trigger:delay {interval_in_ms / 1000}")
-        
-    def set_number_of_readings(self, number_of_readings):
-        self.keithley.write(f"sample:count {number_of_readings}")
-        self.keithley.write("trace:points %d" % number_of_readings)
-        
-    def enable_measurement(self):
-        self.keithley.write("status:measurement:enable 512; *sre 1")
-        
-    def set_trigger_source(self, source):
-        self.keithley.write(f"trigger:source {source}")
-        
-    def set_trace_feed(self, feed):
-        self.keithley.write(f"trace:feed {feed}; feed:control next")
-        
-    def initiate_measurement(self):
-        self.keithley.write("initiate")
-        
-    def assert_trigger(self):
-        self.keithley.assert_trigger()
-        
-    def wait_for_srq(self):
-        self.keithley.wait_for_srq()
+        :param N: int, number of samples to acquire
+        :return: pandas.DataFrame, with columns 't' (time) and 'V' (voltage)
+        """
+        df = pd.DataFrame(columns=['t', 'V'])
+        t0 = time.time()
+        for i in range(N):
+            df.loc[i] = [time.time()-t0, self.single_measurement()]
+        return df
 
+    def plot_results(self, df):
+        """
+        Plot the results of the measurement in a graph and save it as a PNG file.
 
+        :param df: pandas.DataFrame, with columns 't' (time) and 'V' (voltage)
+        """
+        fig = plt.figure(figsize=(11.6, 8.2), dpi=300, facecolor='w', edgecolor='k')
+        plt.plot(df.t, df.V, 'k.')
+        plt.xlabel('Time (s)')
+        plt.ylabel('Voltage (V)')
+        plt.title('Keithley 2182 Nanovoltmeter measurement (Integration time: 1 PLC @ ' + str(np.round((len(df)-1)/df.iloc[N-1].t, 3)) + ' Sa/s)')
+        plt.grid(True)
+        plt.savefig('Measurement_result.png')
+        plt.show()
 
+if __name__ == '__main__':
+    # Initialize the NanovoltmeterMeasurement class
+    measurement = NanovoltmeterMeasurement()
 
-keithley = KeithleyController("GPIB::12")
-keithley.reset()
-keithley.set_measurement_interval(500)
-keithley.set_number_of_readings(10)
-keithley.enable_measurement()
-keithley.set_trigger_source("bus")
-keithley.set_trace_feed("sense1")
-keithley.initiate_measurement()
-keithley.assert_trigger()
-keithley.wait_for_srq()
+    # Perform a single measurement
+    print(f"Measured value: {measurement.single_measurement()} Volts.")
 
+    # Perform N measurements
+    N = 2048
+    df = measurement.multiple_measurements(N)
+
+    # Plot and save the results
+    measurement.plot_results(df)
