@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbef5ad5-93ec-4f5f-8276-4290f77e123a" name="Changes" comment="try GUI with 'test_gui,py'">
-      <change beforePath="$PROJECT_DIR$/.idea/PI_1_measurment_py.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PI_1_measurment_py.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Keithley2182_nanovoltmeter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Keithley2182_nanovoltmeter.py" afterDir="false" />
-    </list>
+    <list default="true" id="bbef5ad5-93ec-4f5f-8276-4290f77e123a" name="Changes" comment="chaneged 'Keithley2182_nanovoltmeter.py' to use GPIB connection through Pyvisa-py." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -198,7 +193,7 @@
       <workItem from="1681387518251" duration="3894000" />
       <workItem from="1681402451015" duration="7300000" />
       <workItem from="1681815955332" duration="2704000" />
-      <workItem from="1681973427140" duration="1382000" />
+      <workItem from="1681973427140" duration="1465000" />
     </task>
     <task id="LOCAL-00001" summary="New update">
       <created>1681324668353</created>
@@ -249,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681406442246</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="chaneged 'Keithley2182_nanovoltmeter.py' to use GPIB connection through Pyvisa-py.">
+      <created>1681981822141</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1681981822141</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +264,8 @@
     <MESSAGE value="added sweeping of magnetic field" />
     <MESSAGE value="added mock measure" />
     <MESSAGE value="try GUI with 'test_gui,py'" />
-    <option name="LAST_COMMIT_MESSAGE" value="try GUI with 'test_gui,py'" />
+    <MESSAGE value="chaneged 'Keithley2182_nanovoltmeter.py' to use GPIB connection through Pyvisa-py." />
+    <option name="LAST_COMMIT_MESSAGE" value="chaneged 'Keithley2182_nanovoltmeter.py' to use GPIB connection through Pyvisa-py." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
